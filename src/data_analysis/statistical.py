@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 variance_threshold = 1.0e-5
 
 
@@ -25,9 +26,11 @@ def euclidean_distance_pd(list_ref, list_comp, df):
         df (data frame): The data object.
 
     Returns:
-        numpy array: The Euclidean distance (L2 norm) for comparison vs. reference\
+        data frame: The Euclidean distance (L2 norm) for comparison vs. reference\
         vectors."""
     distances = np.zeros(len(list_ref))
+    row_indices = []
     for i in range(len(list_ref)):
-        distances[i] = np.linalg.norm(df[list_comp[i]] - df[list_ref[i]])
-    return distances
+        distances[i] = np.linalg.norm(df.values[list_comp[i]] - df.values[list_ref[i]])
+        row_indices.append(str(list_ref[i]) + ' to ' + str(list_comp[i]))
+    return pd.DataFrame(data=distances, index=row_indices, columns=["EucDist"])
