@@ -6,7 +6,7 @@ import pandas as pd
 
 
 def read_files(folder)->Dict[str, pd.DataFrame]:
-    """Read in all data files.
+    """Read in all data files. The time will be the index if present.
 
     Parameters
     ----------
@@ -26,14 +26,27 @@ def read_files(folder)->Dict[str, pd.DataFrame]:
     nstate = np.loadtxt(folder / filenames[3], skiprows=1)
     # convert to complex
     nstate_complex = nstate[:,1::2].astype('complex') + nstate[:,2::2]*1j
-    # add time again
-    nstate_complex_time = np.concatenate([nstate[:,0:1], nstate_complex], axis=1)
+    nstate_df = pd.DataFrame(nstate_complex)
+    nstate_df.set_index(nstate[:,0])
+    nstate_df.index.name = 'time'
 
     result_dict = {
-        'efield' : pd.read_csv(folder / filenames[0], delim_whitespace=True),
-        'expec' : pd.read_csv(folder / filenames[1], delim_whitespace=True),
-        'npop' : pd.read_csv(folder / filenames[2], delim_whitespace=True),
-        'nstate_i' : pd.DataFrame(nstate_complex_time, columns=['time'] + list(np.arange(nstate_complex.shape[1], dtype=int))),
+        'efield' : pd.read_csv(folder / filenames[0], delim_whitespace=True).set_index('time'),
+        'expec' : pd.read_csv(folder / filenames[1], delim_whitespace=True).set_index('time'),
+        'npop' : pd.read_csv(folder / filenames[2], delim_whitespace=True).set_index('time'),
+        'nstate_i' : nstate_df,
         'table' : pd.read_csv(folder / filenames[4], delim_whitespace=True)
     }
     return result_dict
+
+def export_df(df:pd.DataFrame, filename):
+    """Export a dataframe to a file
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        The frame to export
+    filename : str
+        The file to export to
+    """
+    df.to_csv(filename)

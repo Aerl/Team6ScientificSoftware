@@ -8,8 +8,12 @@ Welcome to Data Analysis's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
 
+   input_output
+   main
+   numerical
+   plot
+   statistical
 
 
 Indices and tables
