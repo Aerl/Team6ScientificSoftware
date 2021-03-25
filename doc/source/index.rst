@@ -12,7 +12,6 @@ Welcome to Data Analysis's documentation!
 
    README
    input_output
-   main
    numerical
    plot
    statistical

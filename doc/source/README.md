@@ -1,2 +1,2 @@
-# Team6ScientificSoftware
+# ReadMe
 Team 6 is the best.
