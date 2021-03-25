@@ -2,7 +2,7 @@ import unittest
 
 import numpy as np
 
-from src.data_analysis import numerical
+from data_analysis import numerical
 
 class TestNumerical(unittest.TestCase):
     def test_autocorr_single(self):
