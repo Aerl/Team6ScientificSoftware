@@ -8,7 +8,9 @@ Welcome to Data Analysis's documentation!
 
 .. toctree::
    :maxdepth: 2
+   :caption: Contents:
 
+   README
    input_output
    main
    numerical
