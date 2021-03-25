@@ -16,10 +16,7 @@ def autocorr_single_tp(a:np.array, t:int)->float:
     float
         The autocorrelation as a real number.
     """
-    if t == 0:
-         return np.real(np.sum(a * np.conj(a)))
-    else:
-        return np.real(np.sum(a[t:] * np.conj(a[:-t])))
+    return np.real(np.sum(a[0] * np.conj(a[t])))
 
 def autocorr(df:pd.DataFrame)->pd.DataFrame:
     """Do autocorrelation for all possible time steps over all columns.
