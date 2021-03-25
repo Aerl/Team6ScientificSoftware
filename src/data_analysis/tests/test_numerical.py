@@ -19,15 +19,18 @@ class build_wf:
         arr = np.ones((self.dim1,), dtype=complex)
         return arr*self.myval
 
-@pytest.fixture
-def test_wf():
+@pytest.fixture(scope='module')
+def init_obj():
     obj = build_wf(3, 3, 1.0)
-    return obj.init_array()
+    return obj
 
 @pytest.fixture
-def ref_auto():
-    obj = build_wf(3, 3, 3.0)
-    return obj.init_vector()
+def test_wf(init_obj):
+    return init_obj.init_array()
+
+@pytest.fixture
+def ref_auto(init_obj):
+    return init_obj.init_vector()
 
 def test_autocorr_single():
     test_array = np.random.rand(8)

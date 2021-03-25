@@ -35,7 +35,7 @@ def autocorr(df:pd.DataFrame)->pd.DataFrame:
         The resulting dataframe with timestep as index and one column named autocorr
     """
     df_result = pd.DataFrame()
-    df_result['autocorr'] = [autocorr_single_tp(df.values,i) for i in range(df.shape[0]-1)]
+    df_result['autocorr'] = [autocorr_single_tp(df.values,i) for i in range(df.shape[0])]
     df_result.index.name = 'timestep'
     return df_result
 
