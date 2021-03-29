@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 
+
 def plot_df(df, filename):
     """Plot a dataframe
 

@@ -1,7 +1,8 @@
 import numpy as np
 import pandas as pd
 
-def autocorr_single_tp(a:np.array, t:int)->float:
+
+def autocorr_single_tp(a: np.array, t: int) -> float:
     """Do autocorrelation for a single time point.
 
     Parameters
@@ -18,7 +19,8 @@ def autocorr_single_tp(a:np.array, t:int)->float:
     """
     return np.real(np.sum(a[0] * np.conj(a[t])))
 
-def autocorr(df:pd.DataFrame)->pd.DataFrame:
+
+def autocorr(df: pd.DataFrame) -> pd.DataFrame:
     """Do autocorrelation for all possible time steps over all columns.
 
     Parameters
@@ -32,11 +34,12 @@ def autocorr(df:pd.DataFrame)->pd.DataFrame:
         The resulting dataframe with timestep as index and one column named autocorr
     """
     df_result = pd.DataFrame()
-    df_result['autocorr'] = [autocorr_single_tp(df.values,i) for i in range(df.shape[0])]
+    df_result['autocorr'] = [autocorr_single_tp(df.values, i) for i in range(df.shape[0])]
     df_result.index.name = 'timestep'
     return df_result
 
-def fourier_transform(df:pd.DataFrame)->pd.DataFrame:
+
+def fourier_transform(df: pd.DataFrame) -> pd.DataFrame:
     """Fourier transform a dataframe column-wise. The shape of the dataframe is
     not changed, only the column names are appended with _ft.
 

@@ -4,7 +4,8 @@ variance_threshold = 1.0e-5
 
 
 def filter_by_variance_pd(df, threshold=variance_threshold):
-    """Filters entries in df by their variance. Entries with variance lower than threshold are dropped.
+    """Filters entries in df by their variance. Entries with variance lower than
+    threshold are dropped.
 
     Args:
         df (data frame): A list with the indices of the reference vectors.
