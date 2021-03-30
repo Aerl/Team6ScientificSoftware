@@ -3,7 +3,7 @@ import pandas as pd
 
 import numpy as np
 
-from data_analysis import numerical
+from data_analysis import autocorr, autocorr_single_tp
 
 
 class build_wf:
@@ -40,8 +40,8 @@ def test_autocorr_single():
     test_array = np.random.rand(8)
     # norm the test data
     test_array = test_array / np.sqrt(np.sum(np.square(test_array)))
-    pytest.approx(numerical.autocorr_single_tp(test_array, 0), 1)
+    pytest.approx(autocorr_single_tp(test_array, 0), 1)
 
 
 def test_autocorr(test_wf, ref_auto):
-    assert np.allclose(numerical.autocorr(pd.DataFrame(test_wf)).values, ref_auto)
+    assert np.allclose(autocorr(pd.DataFrame(test_wf)).values, ref_auto)
